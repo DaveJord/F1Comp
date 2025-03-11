@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 Leaderboard | Formula 1 2024</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/table.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="container">
+            <div class="logo">
+                <img src="assets/images/f1-logo-placeholder.png" alt="F1 Logo" class="logo-img">
+                <span class="logo-text">F1 Stats Hub</span>
+                <span class="alpha-tag">alpha</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" class="active">Leaderboard</a></li>
+                <li><a href="#">Races <span class="alpha-tag">alpha</span></a></li>
+                <li><a href="#">Drivers <span class="alpha-tag">alpha</span></a></li>
+                <li><a href="#">Teams <span class="alpha-tag">alpha</span></a></li>
+                <li><a href="#">News <span class="alpha-tag">alpha</span></a></li>
+            </ul>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>2024 Formula 1 Championship</h1>
+            <p>Live tracking of driver standings throughout the season</p>
+            <div class="hero-cta">
+                <a href="#leaderboard-section" class="btn btn-primary">View Standings</a>
+                <a href="#" class="btn btn-secondary">Race Calendar</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Season Overview Card -->
+        <section class="season-overview">
+            <div class="card">
+                <div class="card-header">
+                    <h2>2024 Season Overview</h2>
+                </div>
+                <div class="card-body">
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-number">24</span>
+                            <span class="stat-label">Races</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">20</span>
+                            <span class="stat-label">Drivers</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">10</span>
+                            <span class="stat-label">Teams</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">6</span>
+                            <span class="stat-label">Sprint Races</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Latest Race Results Preview -->
+        <section class="latest-race">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Latest Race: Emilia Romagna Grand Prix</h2>
+                    <span class="date">May 19, 2024</span>
+                </div>
+                <div class="card-body race-podium">
+                    <div class="podium-item podium-second">
+                        <div class="position">2</div>
+                        <div class="driver-avatar">
+                            <img src="assets/images/driver-placeholder.png" alt="Second Place">
+                        </div>
+                        <div class="driver-name">Oscar Piastri</div>
+                        <div class="team">McLaren</div>
+                    </div>
+                    <div class="podium-item podium-first">
+                        <div class="position">1</div>
+                        <div class="driver-avatar">
+                            <img src="assets/images/driver-placeholder.png" alt="First Place">
+                        </div>
+                        <div class="driver-name">Max Verstappen</div>
+                        <div class="team">Red Bull</div>
+                    </div>
+                    <div class="podium-item podium-third">
+                        <div class="position">3</div>
+                        <div class="driver-avatar">
+                            <img src="assets/images/driver-placeholder.png" alt="Third Place">
+                        </div>
+                        <div class="driver-name">Lando Norris</div>
+                        <div class="team">McLaren</div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="btn btn-outline">View Complete Results</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Leaderboard Section -->
+        <section id="leaderboard-section" class="leaderboard-container">
+            <div class="section-header">
+                <h2>Standings</h2>
+                <div class="section-controls">
+                    <button id="toggle-view" class="btn btn-sm">
+                        <i class="fas fa-table"></i> Toggle View
+                        <span class="alpha-tag">alpha</span>
+                    </button>
+                    <div class="filter-dropdown">
+                        <button class="btn btn-sm dropdown-toggle">
+                            <i class="fas fa-filter"></i> Filter
+                            <span class="alpha-tag">alpha</span>
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="#">Show All</a>
+                            <a href="#">Top 10 Only</a>
+                            <a href="#">By Team</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table id="leaderboard">
+                    <thead>
+                        <tr>
+                            <th class="sticky-col">Name</th>
+                            <th>AUS</th>
+                            <th>CHN</th>
+                            <th>JAP</th>
+                            <th>BAH</th>
+                            <th>SAU</th>
+                            <th>MIA</th>
+                            <th>EmR</th>
+                            <th>MON</th>
+                            <th>SPN</th>
+                            <th>CAN</th>
+                            <th>AUT</th>
+                            <th>GBR</th>
+                            <th>BEL</th>
+                            <th>HUN</th>
+                            <th>NLD</th>
+                            <th>MZA</th>
+                            <th>AZE</th>
+                            <th>SGP</th>
+                            <th>TEX</th>
+                            <th>MEX</th>
+                            <th>BRA</th>
+                            <th>LAS</th>
+                            <th>QAT</th>
+                            <th>ABU</th>
+                            <th>PSQP</th>
+                            <th>Points</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Leaderboard data will be inserted here by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="leaderboard-note">
+                <p><i class="fas fa-info-circle"></i> This leaderboard is automatically updated after each race. Last updated on: <span id="last-updated">May 22, 2024</span></p>
+            </div>
+        </section>
+
+        <!-- Coming Soon Features -->
+        <section class="coming-soon">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Coming Soon Features</h2>
+                </div>
+                <div class="card-body">
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <i class="fas fa-chart-line"></i>
+                            <h3>Performance Analytics</h3>
+                            <p>Advanced driver and team performance metrics</p>
+                            <span class="blame-tag">Delayed by David Jordan</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-video"></i>
+                            <h3>Race Highlights</h3>
+                            <p>Video highlights from each race weekend</p>
+                            <span class="blame-tag">David Jordan forgot the videos</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-comments"></i>
+                            <h3>Community Discussion</h3>
+                            <p>Join the conversation with other F1 fans</p>
+                            <span class="blame-tag">David Jordan lost the comments section</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>F1 Stats Hub</h3>
+                    <p>Unofficial Formula 1 statistics and leaderboard tracking for the 2024 season.</p>
+                    <p class="disclaimer">This is not affiliated with the official Formula 1 website.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Races</a></li>
+                        <li><a href="#">Standings</a></li>
+                        <li><a href="#">Teams</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Race Calendar</a></li>
+                        <li><a href="#">Track Information</a></li>
+                        <li><a href="#">Historical Data</a></li>
+                        <li><a href="#">API Documentation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Connect</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-reddit-alien"></i></a>
+                    </div>
+                    <p class="contact">Questions or feedback? <br><a href="mailto:contact@example.com">contact@example.com</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 F1 Stats Hub. Placeholder site created for demonstration purposes.</p>
+                <p class="credit">Website design by someone who is clearly not David Jordan, as he would've forgotten half these features.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/leaderboard.js"></script>
+    <script src="assets/js/site.js"></script>
+</body>
+</html>
