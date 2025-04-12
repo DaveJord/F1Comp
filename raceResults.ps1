@@ -134,7 +134,7 @@ for($r=1; $r -le $tracks.Count; $r++){
 
         if(($raceResultsRow.($raceNo + $raceBonusQuestion2)) -ne "NA") {
             if(($raceResultsRow.($raceNo + $raceBonusQuestion2)) -match ($raceInputArray[$p].($raceNo + $raceBonusQuestion2))){
-                            $playerRaceScore += 15
+                            $playerRaceScore += 20
             
              }
         }
