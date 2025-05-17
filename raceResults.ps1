@@ -219,7 +219,9 @@ $displayBets | Format-Table
 
 
 Write-Host "`n`nBonus Question Answer(s):" $raceResultsRow.($currentRace + $raceBonusQuestion2)
-$bonusPointsWinners | Sort-Object -Property Points -Descending | Format-Table
+
+
+#$bonusPointsWinners | Sort-Object -Property Points -Descending | Format-Table
 
 Write-Host "`n`nLeaderboard:"
 $data | Select-Object Name, ($tracks.$previousRace), ($tracks.$currentRace), ($tracks.$nextRace), CDP, Points, Bets, Total | Sort-Object -Property Total, CDP -Descending | Format-Table
