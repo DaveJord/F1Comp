@@ -58,7 +58,7 @@ for($init=0;$init -lt (($raceInputArray.Name).Count); $init++){
                         $tracks.Race6="";$tracks.Race7="";$tracks.Race8="";$tracks.Race9="";$tracks.Race10="";$tracks.Race11="";
                         $tracks.Race12="";$tracks.Race13="";$tracks.Race14="";$tracks.Race15="";$tracks.Race16="";$tracks.Race17="";
                         $tracks.Race18="";$tracks.Race19="";$tracks.Race20="";$tracks.Race21="";$tracks.Race22="";$tracks.Race23="";
-                        $tracks.Race24="";CDP="";Points="";Bets="";Total="";PSQP="";Final="";}
+                        $tracks.Race24="";CDP="";Points="";Bets="";Total="";Bonus="";Final="";}
     )
 }
 
@@ -202,6 +202,20 @@ for($p=0; $p -lt (($data.Name).Count); $p++){
     [double]$data[($p)].Total += $sideBetScore
 }
 
+    for($b=0;$b -lt (($data.Name).Count);$b++){
+
+        $playerBonus = 0.00
+        for($q=0;$q -lt (($bonusInput.Question).Count);$q++){
+            $pn = $data[$b].Name
+
+            if($bonusInput[$q].$pn -eq $bonusAnswers[$q].Answer){
+                $playerBonus += 30
+            }
+        }
+        $data[$b].Bonus = $playerBonus
+        $data[$b].Total = $data[$b].Total + $data[$b].Bonus
+    }
+
 $previousRace = "Race" + ($currentRaceNo - 1).ToString()
 $currentRace = "Race" + $currentRaceNo.ToString()
 if($currentRace -ne 24){
@@ -219,10 +233,12 @@ $displayBets | Format-Table
 
 
 Write-Host "`n`nBonus Question Answer(s):" $raceResultsRow.($currentRace + $raceBonusQuestion2)
-$bonusPointsWinners | Sort-Object -Property Points -Descending | Format-Table
+
+
+#$bonusPointsWinners | Sort-Object -Property Points -Descending | Format-Table #commenting out to tidy up display output
 
 Write-Host "`n`nLeaderboard:"
-$data | Select-Object Name, ($tracks.$previousRace), ($tracks.$currentRace), ($tracks.$nextRace), CDP, Points, Bets, Total | Sort-Object -Property Total, CDP -Descending | Format-Table
+$data | Select-Object Name, ($tracks.$previousRace), ($tracks.$currentRace), ($tracks.$nextRace), CDP, Points, Bets, Bonus, Total | Sort-Object -Property Total, CDP -Descending | Format-Table
 $data | Sort-Object -Property Total, CDP -Descending | Export-Csv .\Leaderboard.csv -NoTypeInformation -Force 
 
 Write-Host "`nSidebets Results:"
@@ -238,7 +254,7 @@ $displayBets | Format-Table
 
 
 
-
+<# Unused code
 if(($checkBonus -contains "") -or ($raceResultsRow.'Race24-1' -eq "") ){
     $calcBonus = $false
 } else {
@@ -253,14 +269,14 @@ if($calcBonus){
             $pn = $data[$b].Name
 
             if($bonusInput[$q].$pn -eq $bonusAnswers[$q].Answer){
-                $playerBonus += 0.05
+                $playerBonus += 30
             }
         }
-        $data[$b].PSQP = $playerBonus
-        $data[$b].Total = $data[$b].Points + ($data[$b].PSQP * $data[$b].Points)
+        #$data[$b].Bonus = $playerBonus
+        $data[$b].Total = $data[$b].Total + $playerBonus
     }
 
     Write-Host "`nLeaderboard with bonus points:"
     $data | Sort-Object -Property Total, CDP -Descending | Format-Table * 
     $data | Sort-Object -Property Total, CDP -Descending | Export-Csv .\LeaderboardWithBonus.csv -NoTypeInformation -Force
-}
+} #>
