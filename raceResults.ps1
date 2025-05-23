@@ -158,8 +158,16 @@ for($r=1; $r -le $tracks.Count; $r++){
                 $bonusPointsWinners += @([pscustomobject]@{Player="$($data[$p].Name)";Info="Off by: $gap seconds`t";Points="$bonusPoints";})     
             
             }
-            elseif($null){
-
+            elseif(($tracks.($raceNo)) -match "MON"){
+                $gap = ([math]::Abs([int]$bonusAns - [int]$playerAns))
+               
+                if($gap -le 1){
+                    $bonusPoints = 20
+                    $playerRaceScore += $bonusPoints
+                }else{
+                    $bonusPoints = 0
+                    $playerRaceScore += $bonusPoints
+                }
             }
             elseif($bonusAns -match $playerAns){
                     $playerRaceScore += 20
