@@ -43,3 +43,6 @@
 ## F1 Competition Rules To Be Made Up As We Go Along
 
 TBC, of course.
+
+7. 
+    a. David may deduct points from Philip at any time, for any reason, or no reason.
