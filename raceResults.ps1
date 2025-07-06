@@ -1,32 +1,32 @@
 $raceInputCsv = Import-Csv .\races.csv
 $bonusInput = Import-csv .\bonus.csv
 $bonusAnswers = Import-csv .\bonusAnswers.csv
-$sideBets = Import-csv .\sideBets.csv -WarningAction Ignore | Select-Object Race,Bet,P1,P1Pick,P2,P2Pick,Result 
+$sideBets = Import-csv .\sideBets.csv -WarningAction Ignore | Select-Object Race, Bet, P1, P1Pick, P2, P2Pick, Result 
 
 
 #Write-Host $sideBets 
 
 #break
 
-$checkBonus =  $bonusAnswers.Answer
+$checkBonus = $bonusAnswers.Answer
 
 $raceResultsRow = $raceInputCsv[0]
 
 $raceInputArray = @()
-for($x=0;$x -le (($raceInputCsv.Name).Count); $x++){
-    $raceInputArray += $raceInputCsv[($x+1)]
+for ($x = 0; $x -le (($raceInputCsv.Name).Count); $x++) {
+    $raceInputArray += $raceInputCsv[($x + 1)]
 }
 
 $tracks = @{
-    'Race1' = 'AUS'
-    'Race2' = 'CHN'
-    'Race3' = 'JAP'
-    'Race4' = 'BAH'
-    'Race5' = 'SAU'
-    'Race6' = 'MIA'
-    'Race7' = 'EmR'
-    'Race8' = 'MON'
-    'Race9' = 'SPN'
+    'Race1'  = 'AUS'
+    'Race2'  = 'CHN'
+    'Race3'  = 'JAP'
+    'Race4'  = 'BAH'
+    'Race5'  = 'SAU'
+    'Race6'  = 'MIA'
+    'Race7'  = 'EmR'
+    'Race8'  = 'MON'
+    'Race9'  = 'SPN'
     'Race10' = "CAN"
     'Race11' = 'AUT'
     'Race12' = 'GBR'
@@ -52,17 +52,18 @@ $data = @()
 #$bonusPointsWinners = @([pscustomobject]@{Player="";Info="";Points="";})
 $bonusPointsWinners = @()
 
-for($init=0;$init -lt (($raceInputArray.Name).Count); $init++){
+for ($init = 0; $init -lt (($raceInputArray.Name).Count); $init++) {
     $data += @(
-        [pscustomobject]@{Name=$raceInputArray[$init].Name;$tracks.Race1="";$tracks.Race2="";$tracks.Race3="";$tracks.Race4="";$tracks.Race5="";
-                        $tracks.Race6="";$tracks.Race7="";$tracks.Race8="";$tracks.Race9="";$tracks.Race10="";$tracks.Race11="";
-                        $tracks.Race12="";$tracks.Race13="";$tracks.Race14="";$tracks.Race15="";$tracks.Race16="";$tracks.Race17="";
-                        $tracks.Race18="";$tracks.Race19="";$tracks.Race20="";$tracks.Race21="";$tracks.Race22="";$tracks.Race23="";
-                        $tracks.Race24="";CDP="";Points="";Bets="";Total="";Bonus="";Final="";}
+        [pscustomobject]@{Name = $raceInputArray[$init].Name; $tracks.Race1 = ""; $tracks.Race2 = ""; $tracks.Race3 = ""; $tracks.Race4 = ""; $tracks.Race5 = "";
+            $tracks.Race6 = ""; $tracks.Race7 = ""; $tracks.Race8 = ""; $tracks.Race9 = ""; $tracks.Race10 = ""; $tracks.Race11 = "";
+            $tracks.Race12 = ""; $tracks.Race13 = ""; $tracks.Race14 = ""; $tracks.Race15 = ""; $tracks.Race16 = ""; $tracks.Race17 = "";
+            $tracks.Race18 = ""; $tracks.Race19 = ""; $tracks.Race20 = ""; $tracks.Race21 = ""; $tracks.Race22 = ""; $tracks.Race23 = "";
+            $tracks.Race24 = ""; CDP = ""; Points = ""; Bets = ""; Total = ""; Bonus = ""; Final = "";
+        }
     )
 }
 
-for($r=1; $r -le $tracks.Count; $r++){
+for ($r = 1; $r -le $tracks.Count; $r++) {
     $raceNo = "Race" + $r.ToString()
     $first = "-1"
     $second = "-2"
@@ -75,20 +76,21 @@ for($r=1; $r -le $tracks.Count; $r++){
     $resultArray = @()
     $resultArray += $raceResultsRow.($raceNo + $first), $raceResultsRow.($raceNo + $second), $raceResultsRow.($raceNo + $third)
 
-    if($resultArray -contains ""){
+    if ($resultArray -contains "") {
         $currentRaceNo = $r - 1
         $playerRaceSelection = @()
-        for($p=0; $p -lt ($data.Name).Count; $p++){
+        for ($p = 0; $p -lt ($data.Name).Count; $p++) {
             $playerRaceSelection += @(
-                [pscustomobject]@{Name=$data[$p].Name;
-                                    PreQualy=$raceInputArray[$p].($raceNo + $preQualySelection);
-                                    First=$raceInputArray[$p].($raceNo + $first);
-                                    Second=$raceInputArray[$p].($raceNo + $second);
-                                    Third=$raceInputArray[$p].($raceNo + $third);
-                                    DNF=$raceInputArray[$p].($raceNo + $dnfStr);
-                                    Head2Head=$raceInputArray[$p].($raceNo + $raceBonusQuestion1)
-                                    BonusQ=$raceInputArray[$p].($raceNo + $raceBonusQuestion2)}
-                )
+                [pscustomobject]@{Name = $data[$p].Name;
+                    PreQualy           = $raceInputArray[$p].($raceNo + $preQualySelection);
+                    First              = $raceInputArray[$p].($raceNo + $first);
+                    Second             = $raceInputArray[$p].($raceNo + $second);
+                    Third              = $raceInputArray[$p].($raceNo + $third);
+                    DNF                = $raceInputArray[$p].($raceNo + $dnfStr);
+                    Head2Head          = $raceInputArray[$p].($raceNo + $raceBonusQuestion1)
+                    BonusQ             = $raceInputArray[$p].($raceNo + $raceBonusQuestion2)
+                }
+            )
         }
         #$stewards = @()
         #$stewards = Get-Random -Count 2 $data.Name
@@ -99,23 +101,24 @@ for($r=1; $r -le $tracks.Count; $r++){
         break
     }
 
-    for($p=0; $p -lt ($data.Name).Count; $p++){
+    for ($p = 0; $p -lt ($data.Name).Count; $p++) {
         $playerArray = @()
         $playerArray += $raceInputArray[$p].($raceNo + $first), $raceInputArray[$p].($raceNo + $second), $raceInputArray[$p].($raceNo + $third)
 
         $playerRaceScore = 0
         $playerCorrectAnswer = 0
-        for($q = 0;$q -le 2; $q++){
-            if($resultArray[$q] -eq $playerArray[$q]){
+        for ($q = 0; $q -le 2; $q++) {
+            if ($resultArray[$q] -eq $playerArray[$q]) {
                 $playerCorrectAnswer += 1
-                if(($raceInputArray[$p].($raceNo + $preQualySelection)) -match "Yes"){
+                if (($raceInputArray[$p].($raceNo + $preQualySelection)) -match "Yes") {
                     $playerRaceScore += 15
                 }
                 else {
                     $playerRaceScore += 10
                 }                
-            }elseif ($playerArray -contains $resultArray[$q]) {
-                if(($raceInputArray[$p].($raceNo + $preQualySelection)) -eq "Yes"){
+            }
+            elseif ($playerArray -contains $resultArray[$q]) {
+                if (($raceInputArray[$p].($raceNo + $preQualySelection)) -eq "Yes") {
                     $playerRaceScore += 7.5
                 }
                 else {
@@ -124,54 +127,83 @@ for($r=1; $r -le $tracks.Count; $r++){
             }
         }
 
-        if(($raceResultsRow.($raceNo + $dnfStr)) -match ($raceInputArray[$p].($raceNo + $dnfStr))){
-           if(($raceInputArray[$p].($raceNo + $dnfStr)) -ne ""){
-            $playerRaceScore += 5
-        }
-        }
-
-        if(($raceResultsRow.($raceNo + $raceBonusQuestion1)) -ne "NA") {
-            if(($raceResultsRow.($raceNo + $raceBonusQuestion1)) -match ($raceInputArray[$p].($raceNo + $raceBonusQuestion1))){
-                if(($raceInputArray[$p].($raceNo + $raceBonusQuestion1)) -ne ""){           
+        if (($raceResultsRow.($raceNo + $dnfStr)) -match ($raceInputArray[$p].($raceNo + $dnfStr))) {
+            if (($raceInputArray[$p].($raceNo + $dnfStr)) -ne "") {
                 $playerRaceScore += 5
-                }
-             }
+            }
         }
 
-        if(($raceResultsRow.($raceNo + $raceBonusQuestion2)) -ne "NA") {
+        if (($raceResultsRow.($raceNo + $raceBonusQuestion1)) -ne "NA") {
+            if (($raceResultsRow.($raceNo + $raceBonusQuestion1)) -match ($raceInputArray[$p].($raceNo + $raceBonusQuestion1))) {
+                if (($raceInputArray[$p].($raceNo + $raceBonusQuestion1)) -ne "") {           
+                    $playerRaceScore += 5
+                }
+            }
+        }
+
+        if (($raceResultsRow.($raceNo + $raceBonusQuestion2)) -ne "NA") {
             
             $bonusAns = $raceResultsRow.($raceNo + $raceBonusQuestion2)
             
             $playerAns = ($raceInputArray[$p].($raceNo + $raceBonusQuestion2))
 
-            if(($tracks.($raceNo)) -match "SAU"){
+            if (($tracks.($raceNo)) -match "SAU") {
                 $gap = ([math]::Abs([int]$bonusAns - [int]$playerAns))
                
-                if(($gap * 2) -ge 20){
+                if (($gap * 2) -ge 20) {
                     $bonusPoints = 0
                     $playerRaceScore += $bonusPoints
-                }else{
+                }
+                else {
                     $bonusPoints = (20 - ($gap * 2))
                     $playerRaceScore += $bonusPoints
                 }
 
-                $bonusPointsWinners += @([pscustomobject]@{Player="$($data[$p].Name)";Info="Off by: $gap seconds`t";Points="$bonusPoints";})     
+                $bonusPointsWinners += @([pscustomobject]@{Player = "$($data[$p].Name)"; Info = "Off by: $gap seconds`t"; Points = "$bonusPoints"; })     
             
             }
-            elseif(($tracks.($raceNo)) -match "MON"){
-                $gap = ([math]::Abs([int]$bonusAns - [int]$playerAns))
-               
-                if($gap -le 1){
-                    $bonusPoints = 20
-                    $playerRaceScore += $bonusPoints
-                }else{
+            elseif (($tracks.($raceNo)) -match "MON") {
+                if ($bonusAns -match "NoSelection") {
                     $bonusPoints = 0
-                    $playerRaceScore += $bonusPoints
+                    $playerRaceScore += $bonusPoints 
+                }
+                else {
+                    $gap = ([math]::Abs([int]$bonusAns - [int]$playerAns))
+               
+                    if ($gap -le 1) {
+                        $bonusPoints = 20
+                        $playerRaceScore += $bonusPoints
+                    }
+                    else {
+                        $bonusPoints = 0
+                        $playerRaceScore += $bonusPoints
+                    }
+                }
+
+            }
+
+            elseif (($tracks.($raceNo)) -match "GBR") {
+                if ($bonusAns -match "NoSelection") {
+                    $bonusPoints = 0
+                    $playerRaceScore += $bonusPoints 
+                }
+                else {
+                    $gap = ([math]::Abs([int]$bonusAns - [int]$playerAns))
+               
+                    if ($gap -le 1) {
+                        $bonusPoints = 20
+                        $playerRaceScore += $bonusPoints
+                    }
+                    else {
+                        $bonusPoints = 0
+                        $playerRaceScore += $bonusPoints
+                    }
                 }
             }
-            elseif($bonusAns -match $playerAns){
-                    $playerRaceScore += 20
-             }
+
+            elseif ($bonusAns -match $playerAns) {
+                $playerRaceScore += 20
+            }
         }
 
 
@@ -185,55 +217,57 @@ for($r=1; $r -le $tracks.Count; $r++){
     }
 }
 
-for($p=0; $p -lt (($data.Name).Count); $p++){
+for ($p = 0; $p -lt (($data.Name).Count); $p++) {
     $sideBetScore = 0
     #write-host $data[$p].Name
-    for($b=0; $b -lt (($sideBets.Race).Count);$b++){
-        if($sideBets[$b].Result -ne ""){
-            if($data[$p].Name -eq $sideBets[$b].P1){
-                if($sideBets[$b].P1Pick -match $sideBets[$b].Result){
+    for ($b = 0; $b -lt (($sideBets.Race).Count); $b++) {
+        if ($sideBets[$b].Result -ne "") {
+            if ($data[$p].Name -eq $sideBets[$b].P1) {
+                if ($sideBets[$b].P1Pick -match $sideBets[$b].Result) {
                     $sideBetScore += 5
-                } else {
+                }
+                else {
                     $sideBetScore -= 5 
                 }
             }
-            if($data[$p].Name -eq $sideBets[$b].P2){
-                if($sideBets[$b].P2Pick -match $sideBets[$b].Result){
+            if ($data[$p].Name -eq $sideBets[$b].P2) {
+                if ($sideBets[$b].P2Pick -match $sideBets[$b].Result) {
                     $sideBetScore += 5
-                } else {
+                }
+                else {
                     $sideBetScore -= 5 
                 }
             }
-    }
+        }
     }
     [double]$data[($p)].Bets += $sideBetScore
     [double]$data[($p)].Total += $sideBetScore
 }
 
-    for($b=0;$b -lt (($data.Name).Count);$b++){
+for ($b = 0; $b -lt (($data.Name).Count); $b++) {
 
-        $playerBonus = 0.00
-        for($q=0;$q -lt (($bonusInput.Question).Count);$q++){
-            $pn = $data[$b].Name
+    $playerBonus = 0.00
+    for ($q = 0; $q -lt (($bonusInput.Question).Count); $q++) {
+        $pn = $data[$b].Name
 
-            if($bonusInput[$q].$pn -eq $bonusAnswers[$q].Answer){
-                $playerBonus += 30
-            }
+        if ($bonusInput[$q].$pn -eq $bonusAnswers[$q].Answer) {
+            $playerBonus += 30
         }
-        $data[$b].Bonus = $playerBonus
-        $data[$b].Total = $data[$b].Total + $data[$b].Bonus
     }
+    $data[$b].Bonus = $playerBonus
+    $data[$b].Total = $data[$b].Total + $data[$b].Bonus
+}
 
 $previousRace = "Race" + ($currentRaceNo - 1).ToString()
 $currentRace = "Race" + $currentRaceNo.ToString()
-if($currentRace -ne 24){
+if ($currentRace -ne 24) {
     $nextRace = "Race" + ($currentRaceNo + 1).ToString()
 }
 
 Write-Host "`nSidebets:"
 $displayBets = @()
-foreach($bet in $sideBets){
-    if($bet.Race -Match ($tracks.$nextRace)){
+foreach ($bet in $sideBets) {
+    if ($bet.Race -Match ($tracks.$nextRace)) {
         $displayBets += $bet
     }
 }
@@ -251,8 +285,8 @@ $data | Sort-Object -Property Total, CDP -Descending | Export-Csv .\Leaderboard.
 
 Write-Host "`nSidebets Results:"
 $displayBets = @()
-foreach($bet in $sideBets){
-    if($bet.Race -Match ($tracks.$currentRace)){
+foreach ($bet in $sideBets) {
+    if ($bet.Race -Match ($tracks.$currentRace)) {
         $displayBets += $bet
     }
 }
