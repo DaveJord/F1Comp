@@ -107,29 +107,51 @@ for ($r = 1; $r -le $tracks.Count; $r++) {
 
         $playerRaceScore = 0
         $playerCorrectAnswer = 0
-        for ($q = 0; $q -le 2; $q++) {
-            if ($resultArray[$q] -eq $playerArray[$q]) {
-                $playerCorrectAnswer += 1
-                if (($raceInputArray[$p].($raceNo + $preQualySelection)) -match "Yes") {
-                    $playerRaceScore += 15
+
+        if (($raceInputArray[$p].($raceNo + $preQualySelection)) -eq "All") {
+
+            $allTrue = $true
+
+            for ($q = 0; $q -le 2; $q++) {
+                if ($resultArray[$q] -ne $playerArray[$q]) {
+                    $allTrue = $false
                 }
-                else {
-                    $playerRaceScore += 10
-                }                
+                if ($resultArray[$q] -eq $playerArray[$q]) {
+                    $playerCorrectAnswer += 1
+                }
             }
-            elseif ($playerArray -contains $resultArray[$q]) {
-                if (($raceInputArray[$p].($raceNo + $preQualySelection)) -eq "Yes") {
-                    $playerRaceScore += 7.5
+            if (($raceResultsRow.($raceNo + $dnfStr)) -match ($raceInputArray[$p].($raceNo + $dnfStr))) {
+                if (($raceInputArray[$p].($raceNo + $dnfStr)) -ne "") {
+                    if ($allTrue) { $playerRaceScore += 100 }
                 }
-                else {
-                    $playerRaceScore += 5
-                } 
             }
         }
+        else {
 
-        if (($raceResultsRow.($raceNo + $dnfStr)) -match ($raceInputArray[$p].($raceNo + $dnfStr))) {
-            if (($raceInputArray[$p].($raceNo + $dnfStr)) -ne "") {
-                $playerRaceScore += 5
+            for ($q = 0; $q -le 2; $q++) {
+                if ($resultArray[$q] -eq $playerArray[$q]) {
+                    $playerCorrectAnswer += 1
+                    if (($raceInputArray[$p].($raceNo + $preQualySelection)) -match "Yes") {
+                        $playerRaceScore += 15
+                    }
+                    else {
+                        $playerRaceScore += 10
+                    }                
+                }
+                elseif ($playerArray -contains $resultArray[$q]) {
+                    if (($raceInputArray[$p].($raceNo + $preQualySelection)) -eq "Yes") {
+                        $playerRaceScore += 7.5
+                    }
+                    else {
+                        $playerRaceScore += 5
+                    } 
+                }
+            }
+
+            if (($raceResultsRow.($raceNo + $dnfStr)) -match ($raceInputArray[$p].($raceNo + $dnfStr))) {
+                if (($raceInputArray[$p].($raceNo + $dnfStr)) -ne "") {
+                    $playerRaceScore += 5
+                }
             }
         }
 
@@ -202,19 +224,20 @@ for ($r = 1; $r -le $tracks.Count; $r++) {
             }
 
             elseif ($bonusAns -match $playerAns) {
-                $playerRaceScore += 20
-            }
+                if ($playerAns -ne "") 
+                {$playerRaceScore += 20 }
         }
-
-
-
-
-        [double]$data[($p)].Points += $playerRaceScore
-        [double]$data[($p)].Total += $playerRaceScore
-        [int]$data[($p)].CDP += $playerCorrectAnswer
-
-        $data[($p)].($tracks.$raceNo) = $playerRaceScore
     }
+
+
+
+
+    [double]$data[($p)].Points += $playerRaceScore
+    [double]$data[($p)].Total += $playerRaceScore
+    [int]$data[($p)].CDP += $playerCorrectAnswer
+
+    $data[($p)].($tracks.$raceNo) = $playerRaceScore
+}
 }
 
 for ($p = 0; $p -lt (($data.Name).Count); $p++) {
