@@ -76,8 +76,9 @@ for ($r = 1; $r -le $tracks.Count; $r++) {
     $resultArray = @()
     $resultArray += $raceResultsRow.($raceNo + $first), $raceResultsRow.($raceNo + $second), $raceResultsRow.($raceNo + $third)
 
-    if ($resultArray -contains "") {
-        $currentRaceNo = $r - 1
+    $currentRaceNo = $r - 1
+    if ($resultArray -contains "" -or $currentRaceNo -eq $tracks.Count) {
+    #Hi Dave, is it 2027 already?
         $playerRaceSelection = @()
         for ($p = 0; $p -lt ($data.Name).Count; $p++) {
             $playerRaceSelection += @(
