@@ -5,18 +5,18 @@ $sideBets = Import-csv .\sideBets.csv -WarningAction Ignore | Select-Object Race
 
 $raceResultsRow = $raceInputCsv[0]
 
-$pointsAllorNothing = 0
+$pointsAllorNothing = 150
 
-$pointsCorrectPosition = 0
-$pointsTopFive = 0
+$pointsCorrectPosition = 10
+$pointsTopFive = 2
 
-$pointsCorrectPositionPreQualy = 0
-$pointsTopFivePreQualy = 0
+$pointsCorrectPositionPreQualy = 15
+$pointsTopFivePreQualy = 3
 
-$pointsH2H = 0
-$pointsBQ = 0
+$pointsH2H = 5
+$pointsBQ = 30
 
-$pointsPSQ = 0
+$pointsPSQ = 30
 
 
 

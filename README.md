@@ -2,6 +2,19 @@
 
 ## 1. How to Play
 
+For each race, a player will select 5 drivers to place 1st to 5th. There will be two additional questions per race, a Head to Head between two drivers where a player picks which driver they think will finish ahead, and a bonus question. The H2H and Bonus questions will be decided after qualying.
+
+### Bet Types
+
+There will be 3 main bet types, Regular, Pre-Qualy and All or Nothing. Bet types do not affect H2H or Bonus questions.
+
+1. Regular: Regular bets are placed after qualying and pre race, players place their 1st to 5th selection. This is a standard bet and there is no additional bonus awarded.
+
+2. Pre-Qualy: Players place their 1st to 5th selection before qualying starts for a 50% bonus in points received.
+
+3. All or nothing: Players must guess the finishing order from 1st to 5th, if all selected drivers place in the correct position, players receive a 200% bonus in points received. If one or more of the selected drivers are out of position, no points are awarded.
+
+
 ## 2. Prize Structure
 
 ## 3. Main Competition Rules
@@ -49,4 +62,4 @@
 TBC, of course.
 
 1. 
-    a. David may deduct points from any player, at any time, for any reason, or no reason.
+    a. David may deduct points from any player, at any time, for any reason, or no reason at all.
