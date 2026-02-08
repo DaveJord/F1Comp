@@ -2,7 +2,7 @@
 
 ## 1. How to Play
 
-For each race, a player will select 5 drivers to place 1st to 5th. There will be two additional questions per race, a Head to Head between two drivers where a player picks which driver they think will finish ahead, and a bonus question. The H2H and Bonus questions will be decided after qualying each race.
+For each race, a player will select 5 drivers to place 1st to 5th. There will be two additional questions per race, a Head to Head between two drivers where a player picks which driver they think will finish ahead, and a bonus question. The H2H and Bonus questions will be decided after qualifying each race.
 
 ### Bet Types
 
@@ -21,7 +21,7 @@ TBC once Prize fund is final.
 
 ## 3. Main Competition Rules
 
-1. Pre-Season Questions Bonus is applied to a players total race points as each question can be answered.. 
+1. Pre-Season Questions Bonus is applied to a players total race points as each question can be answered. 
 
 2. Answers to the Pre Season Questions will be determined by the admins based on the results of each race, these will be shared before we apply the bonus points to ensure consensus. 
 
