@@ -1,6 +1,10 @@
 # F1 Competition Rules
 
-## Main Competition Rules
+## 1. How to Play
+
+## 2. Prize Structure
+
+## 3. Main Competition Rules
 
 1. Pre-Season Questions Bonus is applied to a players total race points after Abu Dhabi GP. 
 
@@ -22,7 +26,7 @@
 
 9. In the event of the untimely demise of any of the players, while unfortunate, of course, their entry fee is considered forfeit to the competition prize fund and shall not be redeemed by any beneficiaries. Their finishing position in the competition is also forfeit and those players who scored less but who had the good manners not to demise themselves, move up a position.
 
-## F1 Pre-Season Questions Clarifications & Addendums.
+## 4. F1 Pre-Season Questions Clarifications & Addendums.
 
 1. The term "races" only applies to F1 GP races, sprint races are excluded from all consideration.
 
@@ -40,9 +44,9 @@
 
 8. Question 14 refers to George Russells FIA classification for each GP.
 
-## F1 Competition Rules To Be Made Up As We Go Along
+## 5. F1 Competition Rules To Be Made Up As We Go Along
 
 TBC, of course.
 
-7. 
-    a. David may deduct points from Philip at any time, for any reason, or no reason.
+1. 
+    a. David may deduct points from any player, at any time, for any reason, or no reason.
