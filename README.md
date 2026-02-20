@@ -6,10 +6,10 @@ For each race, a player will select 5 drivers to place 1st to 5th. There will be
 
 ### Points
 
-Driver Correct Position: 10 Points
-Driver Top Five: 2 Points
-Head To Head: 5 Points
-Bonus Question: 30 Points
+Driver Correct Position: 10 Points  
+Driver Top Five: 2 Points  
+Head To Head: 5 Points  
+Bonus Question: 20 Points  
 
 ### Bet Types
 

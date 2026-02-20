@@ -14,7 +14,7 @@ $pointsCorrectPositionPreQualy = 15
 $pointsTopFivePreQualy = 3
 
 $pointsH2H = 5
-$pointsBQ = 30
+$pointsBQ = 20
 
 $pointsPSQ = 30
 
