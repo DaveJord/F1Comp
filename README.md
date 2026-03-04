@@ -28,7 +28,7 @@ There will be 3 main bet types, Regular, Pre-Qualy and All or Nothing. Bet types
 
 Total Prize Pot: €600  
   
-1st: €260
+1st: €260  
 2nd: €130  
 3rd: €60  
 4th: €60  
