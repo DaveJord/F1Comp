@@ -4,6 +4,8 @@
 
 For each race, a player will select 5 drivers to place 1st to 5th. There will be two additional questions per race, a Head to Head between two drivers where a player picks which driver they think will finish ahead, and a bonus question. The H2H and Bonus questions will be decided after qualifying each race.
 
+Answers **must** be submitted 30 minutes before the scheduled start time of Qualyfying or the main GP, unless otherwise stated in the WhatsApp Group.
+
 ### Points
 
 Driver Correct Position: 10 Points  
@@ -24,7 +26,15 @@ There will be 3 main bet types, Regular, Pre-Qualy and All or Nothing. Bet types
 
 ## 2. Prize Structure
 
-TBC once Prize fund is final.
+Total Prize Pot: €600  
+  
+1st: €260
+2nd: €130  
+3rd: €60  
+4th: €60  
+  
+€90 allocated in prizes to be announced at end of competition.
+
 
 ## 3. Main Competition Rules
 
@@ -32,9 +42,9 @@ TBC once Prize fund is final.
 
 2. Answers to the Pre Season Questions will be determined by the admins based on the results of each race, these will be shared before we apply the bonus points to ensure consensus. 
 
-3. Each players race selection should be provided no later than 15 minutes before the scheduled start time of each race, if not provided, the players selection from the previous race will be applied. If not provided for the first race, drivers that qualify in 4th to 8th will be used as podium selection. All players selections will be shared before the start of each race. 
+3. Each players race selection should be provided no later than 30 minutes before the scheduled start time of each race, if not provided, the players selection from the previous race will be applied. If not provided for the first race, drivers that qualify in 4th to 8th will be used as podium selection. All players selections will be shared before the start of each race. 
 
-    3a: Earlier submission of race selections may be required where the race start time in UTC is deemed "Too early for this craic". Players will be notified prior to GP qualification if this rule applies. 
+    a: Earlier submission of race selections may be required where the race start time in UTC is deemed "Too early for this craic". Players will be notified prior to GP qualification if this rule applies. 
 
 4. Results will be based on the finishing position of drivers at the end of each race, however, if final results are later revised by FIA due to DSQ, Penalty etc, Results will be updated to match the new finishing positions. This only applies to 1st to 5th selections, H2H or Bonus questions are not affected by post race changes.
 

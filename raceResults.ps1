@@ -62,10 +62,12 @@ for ($init = 0; $init -lt (($raceInputArray.Name).Count); $init++) {
             $tracks.Race6 = ""; $tracks.Race7 = ""; $tracks.Race8 = ""; $tracks.Race9 = ""; $tracks.Race10 = ""; $tracks.Race11 = "";
             $tracks.Race12 = ""; $tracks.Race13 = ""; $tracks.Race14 = ""; $tracks.Race15 = ""; $tracks.Race16 = ""; $tracks.Race17 = "";
             $tracks.Race18 = ""; $tracks.Race19 = ""; $tracks.Race20 = ""; $tracks.Race21 = ""; $tracks.Race22 = ""; $tracks.Race23 = "";
-            $tracks.Race24 = ""; CDP = ""; Points = ""; Total = ""; Bonus = ""; Final = "";
+            $tracks.Race24 = ""; CDP = ""; BP = ""; Points = ""; Total = ""; Bonus = ""; Final = "";
         }
     )
 }
+
+
 
 for ($r = 1; $r -le $tracks.Count; $r++) {
     $raceNo = "Race" + $r.ToString()
@@ -85,7 +87,7 @@ for ($r = 1; $r -le $tracks.Count; $r++) {
 
     $currentRaceNo = $r - 1
     if ($resultArray -contains "" -or $currentRaceNo -eq $tracks.Count) {
-    #Hi Dave, is it 2027 already? - No, Still 2026.
+
         $playerRaceSelection = @()
         for ($p = 0; $p -lt ($data.Name).Count; $p++) {
             $playerRaceSelection += @(
@@ -105,10 +107,19 @@ for ($r = 1; $r -le $tracks.Count; $r++) {
         #$stewards = Get-Random -Count 2 $data.Name
             
         Write-Host "`nPlayer Selection for" $tracks.$raceNo
-        $playerRaceSelection | Format-Table
+        $playerRaceSelection | Sort-Object Name | Format-Table
         #Write-Host "The race stewards are" $stewards[0] "and" $stewards[1]
         break
     }
+
+    $GPData = @()
+    <#
+    for ($init = 0; $init -lt (($raceInputArray.Name).Count); $init++) {
+        $GPData += @(
+            [pscustomobject]@{Name = $raceInputArray[$init].Name; Points = "";IncorrectAnswers = "";CorrectBonus = "";
+            }
+        )
+    } #>
 
     for ($p = 0; $p -lt ($data.Name).Count; $p++) {
         $playerArray = @()
@@ -117,6 +128,7 @@ for ($r = 1; $r -le $tracks.Count; $r++) {
         $playerRaceScore = 0
         $playerCorrectAnswer = 0
         $playerIncorrectCount = 0
+        $playerBonusPoints = 0
 
 
         ## All or nothing Bet
@@ -154,6 +166,7 @@ for ($r = 1; $r -le $tracks.Count; $r++) {
                     $playerIncorrectCount += 1
                 }
         }
+    }
 
         ## Reg Bet
         if (($raceInputArray[$p].($raceNo + $betType)) -eq "Reg") {
@@ -176,6 +189,9 @@ for ($r = 1; $r -le $tracks.Count; $r++) {
         if (($raceResultsRow.($raceNo + $H2H)) -match ($raceInputArray[$p].($raceNo + $H2H))) {
                 if (($raceInputArray[$p].($raceNo + $H2H)) -ne "") {           
                     $playerRaceScore += $pointsH2H
+                    $playerCorrectAnswer += 1
+                } else {
+                    $playerIncorrectCount += 1
                 }
         }
 
@@ -185,9 +201,13 @@ for ($r = 1; $r -le $tracks.Count; $r++) {
         $playerAns = ($raceInputArray[$p].($raceNo + $bonusQ))
 
         if (($raceResultsRow.($raceNo + $BQT)) -eq "StrMatch"){
-            if ($bonusAns -match $playerAns) {
-                if ($playerAns -ne ""){
+            if ($playerAns -ne "") {
+                if ($bonusAns -match $playerAns){
                     $playerRaceScore += $pointsBQ 
+                    $playerBonusPoints += 1
+                    $playerCorrectAnswer += 1
+                }else {
+                    $playerIncorrectCount += 1
                 }
             }
         }
@@ -195,34 +215,50 @@ for ($r = 1; $r -le $tracks.Count; $r++) {
         if (($raceResultsRow.($raceNo + $BQT)) -eq "IntMatch"){
             if([int]$bonusAns -eq [int]$playerAns){
                 $playerRaceScore += $pointsBQ
-            }
+                $playerBonusPoints += 1
+                $playerCorrectAnswer += 1
+            }else {
+                    $playerIncorrectCount += 1
+                }
         }
 
         if (($raceResultsRow.($raceNo + $BQT)) -eq "IntDiff"){
 
             $diff = ([math]::Abs([int]$bonusAns - [int]$playerAns))
                
-                if (($diff * 2) -ge $pointsBQ) {
-                    $bonusPoints = 0
-                    $playerRaceScore += $bonusPoints
-                }
-                else {
+                if (($diff * 2) -lt $pointsBQ) {
                     $bonusPoints = ($pointsBQ - ($diff * 2))
+                    if($diff -eq 0){
+                        $playerBonusPoints += 1
+                        $playerCorrectAnswer += 1
+                    }
                     $playerRaceScore += $bonusPoints
-                }    
-        }   
-    }
-
-
-
-
+                }else {
+                    $playerIncorrectCount += 1
+                }
+              <#  else {
+                    $bonusPoints = ($pointsBQ - ($diff * 2))
+                    if($diff -eq 0){
+                        $playerBonusPoints += 1
+                    }
+                    $playerRaceScore += $bonusPoints
+                }  #>  
+        }
+        
     [double]$data[($p)].Points += $playerRaceScore
     [double]$data[($p)].Total += $playerRaceScore
     [int]$data[($p)].CDP += $playerCorrectAnswer
+    [int]$data[($p)].BP += $playerBonusPoints
 
     $data[($p)].($tracks.$raceNo) = $playerRaceScore
-}
-}
+
+    $GPData += @(
+            [pscustomobject]@{Name = $data[($p)].Name;Points = $playerRaceScore;IncorrectAnswers = $playerIncorrectCount;CorrectBonus = $playerBonusPoints;
+            }
+        )   
+    }    
+    }
+
 
 for ($p = 0; $p -lt (($data.Name).Count); $p++) {
     $sideBetScore = 0
@@ -257,9 +293,11 @@ for ($b = 0; $b -lt (($data.Name).Count); $b++) {
     for ($q = 0; $q -lt (($bonusAnswers.Question).Count); $q++) {
         $pn = $data[$b].Name
 
+        if($bonusAnswers[$q].$pn -ne ""){
         if ($bonusAnswers[$q].$pn -eq $bonusQuestions[$q].Answer) {
             $playerBonus += $pointsPSQ
         }
+    }
     }
     $data[$b].Bonus = $playerBonus
     $data[$b].Total = $data[$b].Total + $data[$b].Bonus
@@ -289,22 +327,39 @@ $displayBets | Format-Table
 #>
 
 
-
-
-#$bonusPointsWinners | Sort-Object -Property Points -Descending | Format-Table #commenting out to tidy up display output
-
-Write-Host "`n`nLeaderboard:"
+Write-Host "`nLeaderboard:"
 if(($tracks.$previousRace)){   
-    $data | Select-Object Name, ($tracks.$previousRace), ($tracks.$currentRace), ($tracks.$nextRace), CDP, Points, Bonus, Total | Sort-Object -Property Total, CDP -Descending | Format-Table
+    $tableOutput = $data | Select-Object Name, ($tracks.$previousRace), ($tracks.$currentRace), ($tracks.$nextRace), BP, Points, Bonus, Total | Sort-Object -Property Total, CDP -Descending | Format-Table | Out-String
 } else{
-     $data | Select-Object Name, ($tracks.$currentRace), ($tracks.$nextRace), CDP, Points, Bonus, Total | Sort-Object -Property Total, CDP -Descending | Format-Table
+     $tableOutput = $data | Select-Object Name, ($tracks.$currentRace), ($tracks.$nextRace), BP, Points, Bonus, Total | Sort-Object -Property Total, CDP -Descending | Format-Table | Out-String
      #($tracks.$currentRace), ($tracks.$nextRace),
 }
 
-Write-Host "Bonus Question Answer(s):" $raceResultsRow.($currentRace + $bonusQ) "`n`n"
 
-$data | Sort-Object -Property Total, CDP -Descending | Export-Csv .\Leaderboard.csv -NoTypeInformation -Force 
+Write-Host $tableOutput
 
+
+
+$data | Sort-Object -Property Total, CDP -Descending | Export-Csv .\Leaderboard.csv -NoTypeInformation -Force
+
+$maxPoints = ($GPData | Measure-Object -Property Points -Maximum).Maximum
+$topScorers = $GPData | Where-Object { $_.Points -eq $maxPoints } | Select-Object -ExpandProperty Name
+
+$maxIncorrect = ($GPData | Measure-Object -Property IncorrectAnswers -Maximum).Maximum
+$mostIncorrect = $GPData | Where-Object { $_.IncorrectAnswers -eq $maxIncorrect } | Select-Object -ExpandProperty Name
+
+$bonusWinners = $GPData | Where-Object { $_.CorrectBonus -eq 1 } | Select-Object -ExpandProperty Name
+
+$bonusOutput = if ($bonusWinners) { 
+    $bonusWinners -join ', ' 
+} else { 
+    "Not even one of ye." 
+}
+
+
+Write-Host "Podium... Top Points Scorer(s) this GP: " -NoNewline; Write-Host "$($topScorers -join ', ')" -ForegroundColor "Yellow"
+Write-Host "`nGone for a Stroll... Most Incorrect Answers: " -NoNewline; Write-Host "$($mostIncorrect -join ', ')" -ForegroundColor "Red"
+Write-Host "`nBonus Question Correct: "-NoNewline; Write-Host "$($bonusOutput -join ', ')`n`n" -ForegroundColor "Cyan"
 
 
 <# Sidebets not in use for 2026
@@ -317,33 +372,3 @@ foreach ($bet in $sideBets) {
 }
 $displayBets | Format-Table
 #>
-
-
-
-
-<# Unused code
-if(($checkBonus -contains "") -or ($raceResultsRow.'Race24-1' -eq "") ){
-    $calcBonus = $false
-} else {
-    $calcBonus = $true
-}
-
-if($calcBonus){  
-    for($b=0;$b -lt (($data.Name).Count);$b++){
-
-        $playerBonus = 0.00
-        for($q=0;$q -lt (($bonusAnswers.Question).Count);$q++){
-            $pn = $data[$b].Name
-
-            if($bonusAnswers[$q].$pn -eq $bonusQuestions[$q].Answer){
-                $playerBonus += 30
-            }
-        }
-        #$data[$b].Bonus = $playerBonus
-        $data[$b].Total = $data[$b].Total + $playerBonus
-    }
-
-    Write-Host "`nLeaderboard with bonus points:"
-    $data | Sort-Object -Property Total, CDP -Descending | Format-Table * 
-    $data | Sort-Object -Property Total, CDP -Descending | Export-Csv .\LeaderboardWithBonus.csv -NoTypeInformation -Force
-} #>
