@@ -200,6 +200,8 @@ for ($r = 1; $r -le $tracks.Count; $r++) {
         $bonusAns = $raceResultsRow.($raceNo + $bonusQ)
         $playerAns = ($raceInputArray[$p].($raceNo + $bonusQ))
 
+
+        if($playerAns -ne "N/A"){
         if (($raceResultsRow.($raceNo + $BQT)) -eq "StrMatch"){
             if ($playerAns -ne "") {
                 if ($bonusAns -match $playerAns){
@@ -235,16 +237,10 @@ for ($r = 1; $r -le $tracks.Count; $r++) {
                     $playerRaceScore += $bonusPoints
                 }else {
                     $playerIncorrectCount += 1
-                }
-              <#  else {
-                    $bonusPoints = ($pointsBQ - ($diff * 2))
-                    if($diff -eq 0){
-                        $playerBonusPoints += 1
-                    }
-                    $playerRaceScore += $bonusPoints
-                }  #>  
+                } 
         }
-        
+        }
+
     [double]$data[($p)].Points += $playerRaceScore
     [double]$data[($p)].Total += $playerRaceScore
     [int]$data[($p)].CDP += $playerCorrectAnswer
