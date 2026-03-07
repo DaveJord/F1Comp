@@ -96,8 +96,8 @@ for ($r = 1; $r -le $tracks.Count; $r++) {
                     First              = $raceInputArray[$p].($raceNo + $first);
                     Second             = $raceInputArray[$p].($raceNo + $second);
                     Third              = $raceInputArray[$p].($raceNo + $third);
-                    Fourth             = $raceInputArray[$p].($raceNo + $third);
-                    Fifth              = $raceInputArray[$p].($raceNo + $third);
+                    Fourth             = $raceInputArray[$p].($raceNo + $fourth);
+                    Fifth              = $raceInputArray[$p].($raceNo + $fifth);
                     Head2Head          = $raceInputArray[$p].($raceNo + $H2H)
                     BonusQ             = $raceInputArray[$p].($raceNo + $bonusQ)
                 }
