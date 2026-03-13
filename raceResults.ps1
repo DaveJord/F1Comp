@@ -239,6 +239,20 @@ for ($r = 1; $r -le $tracks.Count; $r++) {
                     $playerIncorrectCount += 1
                 } 
         }
+
+        if (($raceResultsRow.($raceNo + $BQT)) -eq "IntDiffPM1"){
+
+            $diff = ([math]::Abs([int]$bonusAns - [int]$playerAns))
+               
+                if ($diff -le 1) {
+                    $playerRaceScore += $pointsBQ
+                    $playerBonusPoints += 1
+                    $playerCorrectAnswer += 1
+                }else {
+                    $playerIncorrectCount += 1
+                } 
+        }
+
         }
 
     [double]$data[($p)].Points += $playerRaceScore
