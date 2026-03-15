@@ -187,7 +187,7 @@ for ($r = 1; $r -le $tracks.Count; $r++) {
 
         ## Head to Head
         if (($raceResultsRow.($raceNo + $H2H)) -match ($raceInputArray[$p].($raceNo + $H2H))) {
-                if (($raceInputArray[$p].($raceNo + $H2H)) -ne "") {           
+                if (($raceInputArray[$p].($raceNo + $H2H)) -ne "N/A") {           
                     $playerRaceScore += $pointsH2H
                     $playerCorrectAnswer += 1
                 } else {
