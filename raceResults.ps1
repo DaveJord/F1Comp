@@ -355,6 +355,9 @@ $data | Sort-Object -Property Total, CDP -Descending | Export-Csv .\Leaderboard.
 $maxPoints = ($GPData | Measure-Object -Property Points -Maximum).Maximum
 $topScorers = $GPData | Where-Object { $_.Points -eq $maxPoints } | Select-Object -ExpandProperty Name
 
+$minPoints = ($GPData | Measure-Object -Property Points -Minimum).Minimum
+$leastScorers = $GPData | Where-Object { $_.Points -eq $minPoints } | Select-Object -ExpandProperty Name
+
 $maxIncorrect = ($GPData | Measure-Object -Property IncorrectAnswers -Maximum).Maximum
 $mostIncorrect = $GPData | Where-Object { $_.IncorrectAnswers -eq $maxIncorrect } | Select-Object -ExpandProperty Name
 
@@ -368,7 +371,8 @@ $bonusOutput = if ($bonusWinners) {
 
 
 Write-Host "Podium... Top Points Scorer(s) this GP: " -NoNewline; Write-Host "$($topScorers -join ', ')" -ForegroundColor "Yellow"
-Write-Host "`nGone for a Stroll... Most Incorrect Answers: " -NoNewline; Write-Host "$($mostIncorrect -join ', ')" -ForegroundColor "Red"
+#Write-Host "`nGone for a Stroll... Most Incorrect Answers: " -NoNewline; Write-Host "$($mostIncorrect -join ', ')" -ForegroundColor "Red"
+Write-Host "`nBackmarkers... Least points scored: " -NoNewline; Write-Host "$($leastScorers -join ', ')" -ForegroundColor "Red"
 Write-Host "`nBonus Question Correct: "-NoNewline; Write-Host "$($bonusOutput -join ', ')`n`n" -ForegroundColor "Cyan"
 
 
